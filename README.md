@@ -1,3 +1,7 @@
+##############
+page inscription.php
+#############
+
 1)
 Q :
 c'est quoi les attributs action et method ?
@@ -30,4 +34,16 @@ c'est lequel qui doit être égal à l'attribut for du label ?
 
 R :
 C'est l'attribut name qui doit avoir le même nom que l'attribut for du label.
+//-------------------------------//
+
+##############
+Validation des mots de passe
+#############
+
+1)
+Q :
+xxx
+
+R :
+xxx
 //-------------------------------//
