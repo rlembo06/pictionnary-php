@@ -89,24 +89,24 @@ function loadProfilePic(e) {
             var h = 0;
             var w = 0;
             
-            if(img.width>img.height){
+            if(img.width > img.height)
+            {
+                h = (MAX_HEIGHT / img.width) * img.height;
                 w = MAX_WIDTH;
-                h = MAX_HEIGHT / img.width * img.height;
-            } else {
-                w = MAX_WIDTH / img.height * img.width;
+            } 
+            else 
+            {
+                w = (MAX_WIDTH / img.width) * img.height;
                 h = MAX_HEIGHT;
             }
 
             canvas.width = w;
             canvas.height = h;
 
-
             // on dessine l'image dans le canvas à la position 0,0 (en haut à gauche)  
             // et avec une largeur de width et une hauteur de height  
             /* var imgee*/
-            setTimeout(function () {
-                ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
-            }, 3000);
+            setTimeout(function(){ctx.drawImage(img, 0, 0,  canvas.width, canvas.height); }, 1000);
             //ctx.drawImage(img, 0, 0,  canvas.width, canvas.height);
             // on exporte le contenu du canvas (l'image redimensionnée) sous la forme d'une data url  
             var dataurl = canvas.toDataURL(type);
