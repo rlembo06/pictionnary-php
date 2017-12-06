@@ -39,3 +39,84 @@ function computeAge()
     } 
     catch(e) { alert(e) }
 }
+
+function loadProfilePic(e) {
+
+    // on récupère le canvas où on affichera l'image  
+    var canvas = document.getElementById("preview");
+    var ctx = canvas.getContext("2d");
+
+    // on réinitialise le canvas: on l'efface, et déclare sa largeur et hauteur à 0  
+    ctx.setColoro = "#FF0000";
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+    canvas.width = 0;
+    canvas.height = 0;
+
+    // on récupérer le fichier: le premier (et seul dans ce cas là) de la liste  
+    var file = document.getElementById("profilepicfile").files[0];
+
+    // l'élément img va servir à stocker l'image temporairement  
+    // var img = document.createElement("img");  
+
+    // l'objet de type FileReader nous permet de lire les données du fichier.  
+    var reader = new FileReader();
+
+    // on prépare la fonction callback qui sera appelée lorsque l'image sera chargée  
+    reader.onload = function (e) {
+        //on vérifie qu'on a bien téléchargé une image, grâce au mime type  
+        if (!file.type.match(/image.*/)) {
+            // le fichier choisi n'est pas une image: le champs profilepicfile est invalide, et on supprime sa valeur  
+            document.getElementById("profilepicfile").setCustomValidity("Il faut télécharger une image.");
+            document.getElementById("profilepicfile").value = "";
+        } 
+        else
+        {
+            var type = file.type;
+            // le callback sera appelé par la méthode getAsDataURL, donc le paramètre de callback e est une url qui contient  
+            // les données de l'image. On modifie donc la source de l'image pour qu'elle soit égale à cette url  
+            // on aurait fait différemment si on appelait une autre méthode que getAsDataURL.  
+            var img = document.getElementById('profilepic');
+            img.src = e.target.result;
+
+            // le champs profilepicfile est valide  
+            document.getElementById("profilepicfile").setCustomValidity("");
+
+            var MAX_WIDTH = 96;
+            var MAX_HEIGHT = 96;
+            var width = img.width;
+            var height = img.height;
+
+            var h = 0;
+            var w = 0;
+            
+            if(img.width>img.height){
+                w = MAX_WIDTH;
+                h = MAX_HEIGHT / img.width * img.height;
+            } else {
+                w = MAX_WIDTH / img.height * img.width;
+                h = MAX_HEIGHT;
+            }
+
+            canvas.width = w;
+            canvas.height = h;
+
+
+            // on dessine l'image dans le canvas à la position 0,0 (en haut à gauche)  
+            // et avec une largeur de width et une hauteur de height  
+            /* var imgee*/
+            setTimeout(function () {
+                ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+            }, 3000);
+            //ctx.drawImage(img, 0, 0,  canvas.width, canvas.height);
+            // on exporte le contenu du canvas (l'image redimensionnée) sous la forme d'une data url  
+            var dataurl = canvas.toDataURL(type);
+            console.log(dataurl);
+            // on donne finalement cette dataurl comme valeur au champs profilepic  
+            document.getElementById("profilepic").value = img.src;
+        }
+        ;
+    }
+
+    // on charge l'image pour de vrai, lorsque ce sera terminé le callback loadProfilePic sera appelé.  
+    reader.readAsDataURL(file);
+}  
