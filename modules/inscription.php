@@ -21,7 +21,7 @@
         
         <div id="errorMessage"><p>Cet utilisateur est déjà reconnu selon cet E-Mail</p></div>
         
-        <form class="inscription" id="inscription" action="/" name="inscription">
+        <form class="inscription" id="inscription" action="#" name="inscription">
             <span class="required_notification">Les champs obligatoires sont indiqués par *</span>
 
             <ul>  

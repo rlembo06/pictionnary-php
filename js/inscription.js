@@ -33,16 +33,14 @@ $(document).ready(function(){
         );
         
         var user_json = JSON.stringify(user);
-       
-        var posting = $.post( 'traitements/req_inscription.php', {user: user_json});
         
-        var json = null;
-        posting.done(function( data ) {
-            json = JSON.parse(data);
-            //console.log(json, json.id);
-            
-            if(json.id !== "" || json.id !== null)
+        var existuser = $.post( 'traitements/req_existUser.php', {user: user_json});
+        existuser.done(function(data) {
+                                    
+            if(data.length > 1)
             {
+                var json = JSON.parse(data);
+                
                 $('#email').val('');
                 $('#prenom').val(json.prenom);
                 $('#nom').val(json.nom);
@@ -55,22 +53,25 @@ $(document).ready(function(){
                 $('#mdp2').val(json.password);
                 $('#birthdate').val(json.birthdate);
                 $('#profilepicfile').val(json.profilepic);
-                
+
                 if(json.sexe === 'h') $('#homme').prop("checked", true);
                 if(json.sexe === 'f') $('#femme').prop("checked", true);
-                
+
                 var thisYear = new Date( Date.now() ).getYear();
                 var birthYear = new Date( json.birthdate ).getYear();
                 $('#age').val(thisYear - birthYear);
-                
+
                 $('#errorMessage').show();
-                
-                //event.preventDefault();
+            } 
+            else 
+            {
+                $.post('traitements/req_inscription.php', {user: user_json});
+                location.reload(true);
             }
+            
         });
-        //location.reload(e);
-        //event.preventDefault();
-        //if(json.id === "" || json.id === null) event.preventDefault();
+       
+        event.preventDefault();
     });
     
 });
