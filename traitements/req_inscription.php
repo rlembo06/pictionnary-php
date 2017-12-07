@@ -33,39 +33,6 @@ $user = new User([
     'profilepic'=> $post_user->profilepic
 ]);
 
-/*
-$email       = stripslashes($_POST['email']);
-$password    = stripslashes($_POST['password']);
-$nom         = stripslashes($_POST['nom']);
-$prenom      = stripslashes($_POST['prenom']);
-$tel         = stripslashes($_POST['telephone']);
-$website     = stripslashes($_POST['website']);
-$birthdate   = stripslashes($_POST['birthdate']);
-$ville       = stripslashes($_POST['ville']);
-$taille      = stripslashes($_POST['taille']);
-$couleur     = stripslashes($_POST['couleur']);
-$profilepic  = stripslashes($_POST['profilepicfile']);
-
-$sexe = "";  
-if (array_key_exists('sexe',$_POST)) $sexe = stripslashes($_POST['sexe']);  
-$sexe        = stripslashes($_POST['sexe']);
-
-$user = new User([ 
-    'email'     => $email,
-    'password'  => $password,
-    'nom'       => $nom,
-    'prenom'    => $prenom,
-    'tel'       => $tel,
-    'website'   => $website,
-    'sexe'      => $sexe,
-    'birthdate' => $birthdate,
-    'ville'     => $ville,
-    'taille'    => $taille,
-    'couleur'   => $couleur,
-    'profilepic'=> $profilepic
-]);
-*/
-
 $manager = new Manager($bdd);
 
 if($manager->existUser($user)) echo $manager->getUsers_byEmail($user, true);

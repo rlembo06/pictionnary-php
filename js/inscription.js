@@ -38,7 +38,30 @@ $(document).ready(function(){
         
         posting.done(function( data ) {
             var json = JSON.parse(data);
-            console.log(json, json.email);
+            //console.log(json, json.id);
+            
+            if(json.id !== "" || json.id !== null)
+            {
+                $('#email').val('');
+                $('#prenom').val(json.prenom);
+                $('#nom').val(json.nom);
+                $('#telephone').val(json.tel);
+                $('#website').val(json.website);
+                $('#ville').val(json.ville);
+                $('#taille').val(json.taille);
+                $('#couleur').val('#' + json.couleur);
+                $('#mdp1').val(json.password);
+                $('#mdp2').val(json.password);
+                $('#birthdate').val(json.birthdate);
+                $('#profilepicfile').val(json.profilepic);
+                
+                if(json.sexe === 'h') $('#homme').prop("checked", true);
+                if(json.sexe === 'f') $('#femme').prop("checked", true);
+                
+                var thisYear = new Date( Date.now() ).getYear();
+                var birthYear = new Date( json.birthdate ).getYear();
+                $('#age').val(thisYear - birthYear);
+            }
         });
 
         event.preventDefault();
@@ -61,30 +84,3 @@ var User = function(_email, _prenom, _nom, _telephone, _website, _sexe, _ville, 
     this.birthdate = _birthdate;
     this.profilepic = _profilepic;
 };
-
-
-
-/*
-$.post('traitements/req_inscription.php', {user: user_json})
-    .done(function() { location.reload(true); }
-);
-*/
-
-/*
-$.post('traitements/req_inscription.php', {user: user_json}, function( data ) {
-
-    $('#email').val();
-    $('#prenom').val();
-    $('#nom').val();
-    $('#telephone').val();
-    $('#website').val();
-    $('input[name="sexe"]').val();
-    $('#ville').val();
-    $('#taille').val();
-    $('#couleur').val();
-    $('#mdp1').val();
-    $('#birthdate').val();
-    $('#profilepicfile').val();
-
-}, "json");
-*/

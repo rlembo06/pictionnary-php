@@ -12,8 +12,8 @@ try
 	$bdd = new PDO
 	(
 		/* Host + nom BDD: */'mysql:host=localhost; dbname=pictionnary',
-		/* Identifiant : */'test',
-		/* Mot de passe : */'test',
+		/* Identifiant : */'root',
+		/* Mot de passe : */'',
 		/* Opérateur de résolution de portée : */array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION)
 	);
 	

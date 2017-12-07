@@ -5,15 +5,12 @@
 
 /**
  * @class A faire appel notamment dans les pages de traitements pour l'AJAX ou dans les pages d'interfaces.
- * @tutorial Cette classe gère les classes Question, Reponse, Theme, User.
  */
 
 Class Manager
 {
     /**
      * @var PDO De type PDO, cette variable-objet permet de se connecter à la BDD.
-     * 
-     * @tutorial Cette variable a été instanciée sur la page extend/bdd.php et sur les pages de traitements (dossiers main, admin, profil).
      */
     private $_bdd;
     
@@ -63,59 +60,6 @@ Class Manager
         return $json ? json_encode($result) : $result;
     }
     
-    /*
-    public function getUsers_byEmail(User $object) 
-    {        
-        $requete = $this->_bdd->prepare('SELECT * FROM users WHERE email = :email;');
-        $requete->bindValue(':email', $object->getEmail(), PDO::PARAM_INT);
-        $requete->execute();
-        $result = $requete->fetch(PDO::FETCH_ASSOC);
-        
-        if ($object->getEmail() == $result['email'])
-        {                      
-            setcookie("password", $result['password'], time() + 365*24*3600, null, null, false, true);
-            setcookie("nom", $result['nom'], time() + 365*24*3600, null, null, false, true);
-            setcookie("prenom", $result['prenom'], time() + 365*24*3600, null, null, false, true);
-            setcookie("tel", $result['tel'], time() + 365*24*3600, null, null, false, true);
-            setcookie("website", $result['website'], time() + 365*24*3600, null, null, false, true);
-            setcookie("sexe", $result['sexe'], time() + 365*24*3600, null, null, false, true);
-            setcookie("birthdate", $result['birthdate'], time() + 365*24*3600, null, null, false, true);
-            setcookie("ville", $result['ville'], time() + 365*24*3600, null, null, false, true);
-            setcookie("taille", $result['taille'], time() + 365*24*3600, null, null, false, true);
-            setcookie("couleur", $result['couleur'], time() + 365*24*3600, null, null, false, true);
-            setcookie("profilepic", $result['profilepic'], time() + 365*24*3600, null, null, false, true);
-            
-        }
-    }
-    */
-    
-    /*
-    public function getUsers_byEmail(User $object) 
-    {        
-        $requete = $this->_bdd->prepare('SELECT * FROM users WHERE email = :email;');
-        $requete->bindValue(':email', $object->getEmail(), PDO::PARAM_INT);
-        $requete->execute();
-        $result = $requete->fetch(PDO::FETCH_ASSOC);
-        
-        if ($object->getEmail() == $result['email'])
-        {                      
-            session_start();
-            $_SESSION['password'] = $result['password'];
-            $_SESSION['nom'] = $result['nom'];
-            $_SESSION['prenom'] = $result['prenom'];
-            $_SESSION['tel'] = $result['tel'];
-            $_SESSION['website'] = $result['website'];
-            $_SESSION['sexe'] = $result['sexe'];
-            $_SESSION['birthdate'] = $result['birthdate'];
-            $_SESSION['ville'] = $result['ville'];
-            $_SESSION['taille'] = $result['taille'];        
-            $_SESSION['couleur'] = $result['couleur'];
-            $_SESSION['profilepic'] = $result['profilepic'];
-        }
-    }
-    */
-    
-    
     public function getUsers_byEmail(User $object, $json) 
     {        
         $requete = $this->_bdd->prepare('SELECT * FROM users WHERE email = :email;');
@@ -163,23 +107,41 @@ Class Manager
     }
     
     public function createUser(User $object)
-    {        
+    {   
+        //$sexe = '';
+        //if (array_key_exists('sexe', $object)) $sexe = stripslashes($object->getSexe());  
+        
+        $email       = stripslashes($object->getEmail());
+        $password    = stripslashes($object->getPassword());
+        $nom         = $object->getNom() != "" ? stripslashes($object->getNom()) : null;
+        $prenom      = $object->getPrenom() != "" ? stripslashes($object->getPrenom()) : null;
+        $tel         = $object->getTel() != "" ? stripslashes($object->getTel()) : null;
+        $website     = $object->getWebsite() != "" ? stripslashes($object->getWebsite()) : null;
+        //$sexe        = array_key_exists('sexe', $object) ? stripslashes($object->getSexe()) : null; 
+        $sexe        = $object->getSexe() != "" ? stripslashes($object->getSexe()) : null;
+        $birthdate   = stripslashes($object->getBirthdate());
+        $ville       = stripslashes($object->getVille());
+        $taille      = $object->getTaille() != "" ? stripslashes($object->getTaille()) : null;
+        $couleur     = stripslashes(explode("#", $object->getCouleur())[1]);
+        $profilepic  = $object->getProfilepic() != "" ? stripslashes($object->getProfilepic()) : null;
+        
         $requete = $this->_bdd->prepare('INSERT INTO users(email, password, nom, prenom, tel, website, sexe, birthdate, ville, taille, couleur, profilepic) '
                                         .'VALUES (:email, :password, :nom, :prenom, :tel, :website, :sexe, :birthdate, :ville, :taille, :couleur, :profilepic);');
-        $requete->bindValue(':email', htmlentities($object->getEmail()) );
-        $requete->bindValue(':password', htmlentities($object->getPassword()) );
-        $requete->bindValue(':nom', htmlentities($object->getNom()) );
-        $requete->bindValue(':prenom', htmlentities($object->getPrenom()) );
-        $requete->bindValue(':tel', htmlentities($object->getTel()) );
-        $requete->bindValue(':website', htmlentities($object->getWebsite()) );
-        $requete->bindValue(':sexe', htmlentities($object->getSexe()) );
-        $requete->bindValue(':birthdate', htmlentities($object->getBirthdate()) );
-        $requete->bindValue(':ville', htmlentities($object->getVille()) );
-        $requete->bindValue(':taille', htmlentities($object->getTaille()) );
-        $requete->bindValue(':couleur', htmlentities($object->getCouleur()) );
-        $requete->bindValue(':profilepic', htmlentities($object->getProfilepic()) );
+        $requete->bindValue(':email', $email);
+        $requete->bindValue(':password', $password);
+        $requete->bindValue(':nom', $nom);
+        $requete->bindValue(':prenom', $prenom);
+        $requete->bindValue(':tel', $tel);
+        $requete->bindValue(':website', $website);
+        $requete->bindValue(':sexe', $sexe);
+        $requete->bindValue(':birthdate', $birthdate);
+        $requete->bindValue(':ville', $ville);
+        $requete->bindValue(':taille', $taille);
+        $requete->bindValue(':couleur', $couleur);
+        $requete->bindValue(':profilepic', $profilepic);
         $requete->execute();
     }
+     
     // --------------------------------------------------- //
     
 }

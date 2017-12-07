@@ -18,9 +18,8 @@
     <section>
 
         <h2>Inscrivez-vous</h2> 
-        <!--<form class="inscription" action="traitements/req_inscription.php" method="post" name="inscription">-->
         <form class="inscription" id="inscription" action="/" name="inscription">
-            <span class="required_notification">Les champs obligatoires sont indiqués par *</span>  
+            <span class="required_notification">Les champs obligatoires sont indiqués par *</span>
 
             <ul>  
                 <li>  
@@ -46,9 +45,9 @@
                 </li>
                 <li>  
                     <label for="homme">Homme :</label>  
-                    <input type="radio" name="sexe" id="homme" value="homme"/>
+                    <input type="radio" name="sexe" id="homme" value="h"/>
                     <label for="femme">Femme :</label>  
-                    <input type="radio" name="sexe" id="femme" value="femme"/> 
+                    <input type="radio" name="sexe" id="femme" value="f"/> 
                 </li>
                 <li>  
                     <label for="ville">Ville :</label>  
