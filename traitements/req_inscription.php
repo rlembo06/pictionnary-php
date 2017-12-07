@@ -37,6 +37,6 @@ $manager = new Manager($bdd);
 
 
 $manager->createUser($user);
-$manager->getConnexion($user, '../');
+$manager->getConnexion($user);
 
 echo false;

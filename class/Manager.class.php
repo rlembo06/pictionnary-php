@@ -83,7 +83,7 @@ Class Manager
         return $result = $count > 0 ? true : false;
     }
     
-    public function getConnexion(User $object, $redirection)
+    public function getConnexion(User $object)
     {     
         $requete = $this->_bdd->prepare('SELECT * FROM users WHERE email = :email AND password = :password');
         $requete->bindValue(':email', $object->getEmail());
@@ -99,12 +99,9 @@ Class Manager
             $_SESSION['nom'] = $result['nom'];
             $_SESSION['prenom'] = $result['prenom'];
             $_SESSION['email'] = $result['email'];
+            $_SESSION['profilepic'] = $result['profilepic'];
         }
         else echo '<body onLoad="alert(\'Email ou mot de passe non reconnu\')">';
-                
-        // puis on le redirige vers la page
-        //header('Location: '.$redirection);
-        //echo '<meta http-equiv="refresh" content="0;URL='.$redirection.'">';
     }
     
     public function createUser(User $object)
@@ -142,7 +139,6 @@ Class Manager
         $requete->bindValue(':profilepic', $profilepic);
         $requete->execute();
     }
-     
     // --------------------------------------------------- //
     
 }
