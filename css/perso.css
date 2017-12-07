@@ -3,3 +3,9 @@ section {width: 80%;}
 ul li .inscription input[type="radio"] {
     box-shadow: none !important
 }
+
+#errorMessage 
+{
+    display: none;
+    color: red;
+}

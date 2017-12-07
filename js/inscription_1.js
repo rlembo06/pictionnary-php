@@ -36,9 +36,8 @@ $(document).ready(function(){
        
         var posting = $.post( 'traitements/req_inscription.php', {user: user_json});
         
-        var json = null;
         posting.done(function( data ) {
-            json = JSON.parse(data);
+            var json = JSON.parse(data);
             //console.log(json, json.id);
             
             if(json.id !== "" || json.id !== null)
@@ -68,9 +67,8 @@ $(document).ready(function(){
                 //event.preventDefault();
             }
         });
-        //location.reload(e);
-        //event.preventDefault();
-        //if(json.id === "" || json.id === null) event.preventDefault();
+
+        event.preventDefault();
     });
     
 });

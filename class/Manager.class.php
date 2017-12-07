@@ -86,7 +86,7 @@ Class Manager
     public function getConnexion(User $object, $redirection)
     {     
         $requete = $this->_bdd->prepare('SELECT * FROM users WHERE email = :email AND password = :password');
-        $requete->bindValue(':nom', $object->getNom());
+        $requete->bindValue(':email', $object->getEmail());
         $requete->bindValue(':password', $object->getPassword());       
         $requete->execute();
         $result = $requete->fetch(PDO::FETCH_ASSOC);
@@ -103,7 +103,8 @@ Class Manager
         else echo '<body onLoad="alert(\'Email ou mot de passe non reconnu\')">';
                 
         // puis on le redirige vers la page
-        echo '<meta http-equiv="refresh" content="0;URL='.$redirection.'">';
+        //header('Location: '.$redirection);
+        //echo '<meta http-equiv="refresh" content="0;URL='.$redirection.'">';
     }
     
     public function createUser(User $object)

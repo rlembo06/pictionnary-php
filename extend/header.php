@@ -31,4 +31,8 @@ $manager = new Manager($bdd);
 
     </head>
     
+    <?php if (isset($_SESSION['id']) AND isset($_SESSION['email'])) { ?>
+    <a href="traitements/logout.php">Déconnexion</a>
+    <?php } ?>
+    
     <body>

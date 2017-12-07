@@ -36,7 +36,11 @@ $user = new User([
 $manager = new Manager($bdd);
 
 if($manager->existUser($user)) echo $manager->getUsers_byEmail($user, true);
-else echo $manager->createUser($user);
+else 
+{
+    $manager->createUser($user);
+    $manager->getConnexion($user, '../');
+}
 
 
 
