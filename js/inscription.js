@@ -15,7 +15,9 @@ $(document).ready(function(){
         var couleur = $('#couleur').val();
         var password = $('#mdp1').val();
         var birthdate = $('#birthdate').val();
-        var profilepic = $('#profilepicfile').val();
+        var profilepic = document.getElementById('profilepic').getAttribute('src');
+       
+        console.log(document.getElementById('profilepic').getAttribute('src'));
         
         var user = new User(
             email,
