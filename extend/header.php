@@ -20,9 +20,14 @@ $manager = new Manager($bdd);
         <meta charset=utf-8 />  
         <title>Pictionnary - Inscription</title>
         <meta name="description" content="TP - Lembo Romain">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
         
-<!--        <link rel="stylesheet" media="screen" href="css/styles.css" >-->
+        <link rel="stylesheet" media="screen" href="css/styles.css" >
         <link rel="stylesheet" href="css/perso.css"/>
+        <link rel="stylesheet" href="css/blog-home.css">
+        <link rel="stylesheet" href="css/paint.css">
+
         <link 
             rel="stylesheet" 
             href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" 
@@ -35,50 +40,41 @@ $manager = new Manager($bdd);
 
         <header>
             
-            <?php
-            if (isset($_SESSION['id']) AND isset($_SESSION['email'])) {
-            ?>
-                <div>
-                    <p>Bonjour <?= $_SESSION['prenom'] ?> <?= $_SESSION['nom'] ?></p>
-                </div>
-                <div>
-                    <img src="<?= $_SESSION['profilepic'] ?>"/>
-                </div>
-                <a href="traitements/logout.php">Déconnexion</a>
+            <!-- Navigation -->
+            <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
 
-            <?php } else { ?>
+                <div class="container">
 
-                <form id="connexion" method="post" action="traitements/req_login.php">
-                    <fieldset>
-                        <legend>Se connecter</legend>
-                        <ul>  
-                            <li>  
-                                <label for="email">E-mail :</label>  
-                                <input type="email" name="email" id="emailConnexion" required/>  
-                                <span class="form_hint">Format attendu "name@something.com"</span>  
-                            </li> 
-                            <li>  
-                                <label for="mdp1">Mot de passe :</label>  
-                                <input
-                                    required
-                                    placeholder="Saisir le mot de passe"
-                                    type="password" 
-                                    name="password" 
-                                    id="mdpConnexion" 
-                                    pattern="[0-9a-zA-Z]{5,9}" 
-                                />  
-                                <span class="form_hint">De 6 à 8 caractères alphanumériques.</span>  
-                            </li>
-                            <li>  
-                                <input id="submit" type="submit" value="Connexion" /> 
-                            </li>
-                            <li>  
-                                <a href="inscrire.php">S'inscrire</a>
-                            </li>  
+                    <!-- Brand and toggle get grouped for better mobile display -->
+                    <div class="navbar-header">
+                        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                            <span class="sr-only">Toggle navigation</span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>
+                        <a id="lienTitle" class="navbar-brand" href="index.php">Pictionnary</a>
+                    </div>
+
+                    <!-- Collect the nav links, forms, and other content for toggling -->
+                    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                        <ul class="nav navbar-nav">
+                            <?php if (isset($_SESSION['id']) AND isset($_SESSION['email'])) { ?>
+                                <li><p class="navigation">Bonjour <?= $_SESSION['prenom'] ?> <?= $_SESSION['nom'] ?></p></li>
+                                <li><img class="navigation photoLogin" src="<?= $_SESSION['profilepic'] ?>"/></li>
+                                <li><a class="navigation" href="traitements/logout.php">Déconnexion</a></li>
+                            <?php } else { ?>
+                                <li><a class="navigation" href="inscrire.php">Inscription</a></li>
+                                <li><a class="navigation" href="index.php">Connexion</a></li>
+                            <?php } ?>
                         </ul>
-                    </fieldset>
-                </form>
+                    </div>
+                    <!-- /.navbar-collapse -->
 
-            <?php } ?>
-            
+                </div>
+                <!-- /.container -->
+            </nav>
+       
         </header>
+        
+        <div class="container"><div class="row">

@@ -1,23 +1,23 @@
 <header>
-    <h1>Inscription</h1>
+    <h1>Peindre</h1>
 </header>
 
 <main>
 
-    <?php
-    if (isset($_SESSION['id']) AND isset($_SESSION['email']))
-    { ?>
-
-    <p>CONNECTE</p>
-
-    <?php } else { ?>
-
-    <p>DECONNECTE</p>
-
-    <?php } ?>
     <section>
+        
+        <form name="tools" action="req_paint.php" method="post">  
+            <input type="range" name="size" id="size" min="0" max="3"/>
+            <input type="color" name="color" id="color" class="inputColor" value="#<?= $_SESSION['couleur'] ?>"/>
+            
+            <canvas id="canvas"></canvas>
 
-        <h2>Main</h2> 
+            <input id="restart" type="button" value="Recommencer"/>  
+            <input type="hidden" id="drawingCommands" name="drawingCommands"/>  
+            
+            <input type="hidden" id="picture" name="picture"/>  
+            <input id="validate" type="submit" value="Valider"/>  
+        </form>
         
     </section>
 

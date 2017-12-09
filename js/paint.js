@@ -1,0 +1,91 @@
+var sizes = [8, 20, 44, 90];
+var size, color, selectSize;
+var x0, y0;
+var drawingCommands = [];
+
+var setColor = function () {
+    color = document.getElementById('color').value;
+    console.log("color:" + color);
+}
+
+var setSize = function () {
+    selectSize = document.getElementById('size').value;
+    console.log("selectSize:" + selectSize);
+    
+    switch (selectSize) {
+        case '0':
+            size = sizes[0];
+            break;
+        case '1':
+            size = sizes[1];
+            break;
+        case '2':
+            size = sizes[2];
+            break;
+        case '3':
+            size = sizes[3];
+            break;
+    }
+    
+    console.log("size:" + size);
+}
+
+window.onload = function () {
+    var canvas = document.getElementById('canvas');
+    canvas.width = 400;
+    canvas.height = 400;
+    var context = canvas.getContext('2d');
+
+    setSize();
+    setColor();
+    document.getElementById('size').onchange = setSize;
+    document.getElementById('color').onchange = setColor;
+
+    var isDrawing = false;
+
+    var startDrawing = function (e) {
+        console.log("start");
+        
+        var command = {"command":"start",'x0': x0, 'y0':y0, 'color':color};
+        drawingCommands.push(command);
+
+        isDrawing = true;
+    }
+
+    var stopDrawing = function (e) {
+        console.log("stop");
+        isDrawing = false;
+    }
+
+    var draw = function (e) {
+        if (isDrawing) {
+            context.strokeStyle = color;
+            context.lineWidth = size;
+
+            context.beginPath();
+            context.moveTo(x0, y0);
+            context.lineTo(e.offsetX, e.offsetY);
+            context.stroke();
+
+            [x0, y0] = [e.offsetX, e.offsetY];
+        } 
+        else return;
+    }
+
+    canvas.onmousedown = startDrawing;
+    canvas.onmouseout = stopDrawing;
+    canvas.onmouseup = stopDrawing;
+    canvas.onmousemove = draw;
+
+    document.getElementById('restart').onclick = function () {
+        console.log("clear");
+        context.clearRect(0, 0, canvas.width, canvas.height);  
+    };
+
+    document.getElementById('validate').onclick = function () {
+        // la prochaine ligne transforme la liste de commandes en une chaîne de caractères, et l'ajoute en valeur au champs "drawingCommands" pour l'envoyer au serveur.  
+        document.getElementById('drawingCommands').value = JSON.stringify(drawingCommands);
+
+        // ici, exportez le contenu du canvas dans un data url, et ajoutez le en valeur au champs "picture" pour l'envoyer au serveur.  
+    };
+};  

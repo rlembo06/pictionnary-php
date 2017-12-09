@@ -15,7 +15,7 @@ if( isset($_SESSION['id']) && isset($_SESSION['email']) ) {
 
 <?php
 } 
-else require("modules/inscription.php");
+else require("modules/login.php");
 ?>
         
 <?php

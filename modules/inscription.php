@@ -35,11 +35,11 @@
                     <label for="website">Site web :</label>  
                     <input type="url" value="http://" name="website" id="website" />  
                 </li>
-                <li>  
-                    <label for="homme">Homme :</label>  
-                    <input type="radio" name="sexe" id="homme" value="h"/>
-                    <label for="femme">Femme :</label>  
-                    <input type="radio" name="sexe" id="femme" value="f"/> 
+                <li class="liSexe">  
+                    <label for="homme" class="sexe">Homme :</label>  
+                    <input type="radio" name="sexe" id="homme" class="sexe" value="h"/>
+                    <label for="femme" class="sexe">Femme :</label>  
+                    <input type="radio" name="sexe" id="femme" class="sexe" value="f"/> 
                 </li>
                 <li>  
                     <label for="ville">Ville :</label>  
@@ -47,11 +47,11 @@
                 </li>
                 <li>  
                     <label for="taille">Taille :</label>  
-                    <input type="number" min="0" max="2.50" value="1.5" step="0.01" name="taille" id="taille">
+                    <input type="number" min="0" max="2.50" value="1.5" step="0.01" name="taille" id="taille"/>
                 </li>
                 <li>  
                     <label for="couleur">Couleur préférée :</label>  
-                    <input type="color" name="couleur" id="couleur" value="#000000"/>
+                    <input type="color" name="couleur" id="couleur" class="inputColor" value="#000000"/>
                 </li>
                 <li>  
                     <label for="mdp1">Mot de passe* :</label>  

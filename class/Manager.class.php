@@ -99,6 +99,7 @@ Class Manager
             $_SESSION['prenom'] = $result['prenom'];
             $_SESSION['email'] = $result['email'];
             $_SESSION['profilepic'] = $result['profilepic'];
+            $_SESSION['couleur'] = $result['couleur'];
         }
         else echo '<body onLoad="alert(\'Email ou mot de passe non reconnu\')">';
     }

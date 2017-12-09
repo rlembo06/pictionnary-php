@@ -17,7 +17,7 @@ $(document).ready(function(){
         var birthdate = $('#birthdate').val();
         var profilepic = document.getElementById('profilepic').getAttribute('src');
        
-        console.log(document.getElementById('profilepic').getAttribute('src'));
+        console.log(profilepic);
         
         var user = new User(
             email,
