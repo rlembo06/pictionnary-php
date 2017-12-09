@@ -1,7 +1,4 @@
 <?php
-/**
- * @author Romain Lembo
- */
 class User
 {
     private $id;

@@ -104,32 +104,6 @@ Class Manager
         else echo '<body onLoad="alert(\'Email ou mot de passe non reconnu\')">';
     }
     
-    /*
-    public function getConnexion(User $object)
-    {     
-        $requete = $this->_bdd->prepare('SELECT * FROM users WHERE email = :email AND password = :password');
-        $requete->bindValue(':email', $object->getEmail());
-        $requete->bindValue(':password', $object->getPassword());       
-        $requete->execute();
-        $result = $requete->fetch(PDO::FETCH_ASSOC);
-	
-        if ($object->getEmail() == $result['email'] && $object->getPassword() == $result['password'])
-        {                      
-            session_start();
-
-            $_SESSION['id'] = $result['id'];
-            $_SESSION['nom'] = $result['nom'];
-            $_SESSION['prenom'] = $result['prenom'];
-            $_SESSION['email'] = $result['email'];
-            //$_SESSION['profilepic'] = $result['profilepic'];
-            echo $_SESSION['profilepic'] = base64_decode(file_get_contents($result['profilepic']));
-            echo file_get_contents($result['profilepic']);
-            echo $result['profilepic'];
-        }
-        else echo '<body onLoad="alert(\'Email ou mot de passe non reconnu\')">';
-    }
-    */
-    
     public function createUser(User $object)
     {   
         //$sexe = '';
@@ -167,6 +141,18 @@ Class Manager
     }
     // --------------------------------------------------- //
     
+    // --------------------------------------------------- //
+    // METHODES DRAWING
+    
+    public function createDrawing(Drawing $object)
+    {                   
+        $requete = $this->_bdd->prepare('INSERT INTO drawings(id_user, commandes, draw) VALUES (:id_user, :commandes, :draw);');
+        $requete->bindValue(':id_user', $object->getId_user());
+        $requete->bindValue(':commandes', $object->getCommandes());
+        $requete->bindValue(':draw', $object->getDraw());
+        $requete->execute();
+    }
+    // --------------------------------------------------- //
 }
 
 

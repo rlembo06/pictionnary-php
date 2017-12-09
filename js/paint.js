@@ -81,11 +81,28 @@ window.onload = function () {
         console.log("clear");
         context.clearRect(0, 0, canvas.width, canvas.height);  
     };
+   
+    $('#tools').submit(function( event ) {
+        
+        var commandes = JSON.stringify($('#drawingCommands').val());
+        var draw = canvas.toDataURL();
+        var id_user = $('#id_user').val();
+        
+        var drawing = new Drawing(commandes, draw, id_user);
+        var drawing_json = JSON.stringify(drawing);
+        
+        var postDraw = $.post('traitements/req_paint.php', {drawing: drawing_json});
+        postDraw.done(function(data) {
+            alert('Dessin enregistré !');
+        });
+                
+        event.preventDefault();
+    });
+};
 
-    document.getElementById('validate').onclick = function () {
-        // la prochaine ligne transforme la liste de commandes en une chaîne de caractères, et l'ajoute en valeur au champs "drawingCommands" pour l'envoyer au serveur.  
-        document.getElementById('drawingCommands').value = JSON.stringify(drawingCommands);
-
-        // ici, exportez le contenu du canvas dans un data url, et ajoutez le en valeur au champs "picture" pour l'envoyer au serveur.  
-    };
-};  
+var Drawing = function(_commandes, _draw, _id_user)
+{
+    this.commandes = _commandes;
+    this.draw = _draw;
+    this.id_user = _id_user;
+};

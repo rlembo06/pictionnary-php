@@ -62,7 +62,7 @@ ul li .inscription input[type="radio"] {
 }
 
 #canvas {
-    max-height: 300px;
+/*    max-height: 300px;*/
     width: 100%;
     border-style: solid;
     border-width: 2px;
