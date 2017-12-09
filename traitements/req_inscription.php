@@ -35,6 +35,7 @@ $user = new User([
 
 $manager = new Manager($bdd);
 
+//echo $post_user->profilepic;
 
 $manager->createUser($user);
 $manager->getConnexion($user);

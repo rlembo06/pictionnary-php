@@ -21,13 +21,13 @@ $manager = new Manager($bdd);
         <title>Pictionnary - Inscription</title>
         <meta name="description" content="TP - Lembo Romain">
         
-        <link rel="stylesheet" media="screen" href="css/styles.css" >
+<!--        <link rel="stylesheet" media="screen" href="css/styles.css" >-->
         <link rel="stylesheet" href="css/perso.css"/>
-        <!--<link 
+        <link 
             rel="stylesheet" 
             href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" 
             integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" 
-            crossorigin="anonymous" />-->
+            crossorigin="anonymous" />
 
     </head>
     
