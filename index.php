@@ -5,18 +5,13 @@ require('extend/header.php');
 // ***************** //
 ?>
 
-<?php
-if( isset($_SESSION['id']) && isset($_SESSION['email']) ) {
-?>
+<?php if( isset($_SESSION['id']) && isset($_SESSION['email']) ) { ?>
 
 <!-- Inscription -->
-<?php require("modules/main.php"); ?>
+<?php require("modules/paint.php"); ?>
 <!-- ______________________________________ -->
 
-<?php
-} 
-else require("modules/login.php");
-?>
+<?php } else require("modules/login.php"); ?>
         
 <?php
 // ***************** //

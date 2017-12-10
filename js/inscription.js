@@ -1,7 +1,7 @@
 "use strict";
 
 $(document).ready(function(){
-    
+            
     $( '#inscription' ).submit(function( event ) {
                 
         var email = $('#email').val();
@@ -17,7 +17,7 @@ $(document).ready(function(){
         var birthdate = $('#birthdate').val();
         var profilepic = document.getElementById('profilepic').getAttribute('src');
        
-        console.log(profilepic);
+        //console.log(profilepic);
         
         var user = new User(
             email,
@@ -41,6 +41,8 @@ $(document).ready(function(){
                                     
             if(data.length > 1)
             {
+                $('#errorMessage').html('<p>Cet utilisateur est reconnu selon cet email !</p>');
+
                 var json = JSON.parse(data);
                 
                 $('#email').val('');
@@ -54,7 +56,7 @@ $(document).ready(function(){
                 $('#mdp1').val(json.password);
                 $('#mdp2').val(json.password);
                 $('#birthdate').val(json.birthdate);
-                $('#profilepicfile').val(json.profilepic);
+                $('#profilepic').attr('src', json.profilepic);
 
                 if(json.sexe === 'h') $('#homme').prop("checked", true);
                 if(json.sexe === 'f') $('#femme').prop("checked", true);
@@ -62,8 +64,6 @@ $(document).ready(function(){
                 var thisYear = new Date( Date.now() ).getYear();
                 var birthYear = new Date( json.birthdate ).getYear();
                 $('#age').val(thisYear - birthYear);
-
-                $('#errorMessage').show();
             } 
             else 
             {

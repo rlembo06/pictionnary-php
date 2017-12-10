@@ -66,7 +66,7 @@ $manager = new Manager($bdd);
                                 <li><a class="navigation" href="guess.php">Dessins</a></li>
                                 <li><a class="navigation" href="index.php">Peindre</a></li>
                             <?php } else { ?>
-                                <li><a class="navigation" href="inscrire.php">Inscription</a></li>
+                                <li><a class="navigation" href="inscription.php">Inscription</a></li>
                                 <li><a class="navigation" href="index.php">Connexion</a></li>
                             <?php } ?>
                         </ul>
