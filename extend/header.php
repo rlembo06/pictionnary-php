@@ -63,6 +63,8 @@ $manager = new Manager($bdd);
                                 <li><p class="navigation">Bonjour <?= $_SESSION['prenom'] ?> <?= $_SESSION['nom'] ?></p></li>
                                 <li><img class="navigation photoLogin" src="<?= $_SESSION['profilepic'] ?>"/></li>
                                 <li><a class="navigation" href="traitements/logout.php">Déconnexion</a></li>
+                                <li><a class="navigation" href="guess.php">Dessins</a></li>
+                                <li><a class="navigation" href="index.php">Peindre</a></li>
                             <?php } else { ?>
                                 <li><a class="navigation" href="inscrire.php">Inscription</a></li>
                                 <li><a class="navigation" href="index.php">Connexion</a></li>

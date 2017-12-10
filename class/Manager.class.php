@@ -152,6 +152,16 @@ Class Manager
         $requete->bindValue(':draw', $object->getDraw());
         $requete->execute();
     }
+    
+    public function getDrawings_byUser(User $object, $json) 
+    {        
+        $requete = $this->_bdd->prepare('SELECT * FROM drawings WHERE id_user = :id_user;');
+        $requete->bindValue(':id_user', $object->getId(), PDO::PARAM_INT);
+        $requete->execute();
+        $result = $requete->fetchAll(PDO::FETCH_ASSOC);
+        
+        return $json ? json_encode($result) : $result;
+    }
     // --------------------------------------------------- //
 }
 

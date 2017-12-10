@@ -6,7 +6,7 @@ var drawingCommands = [];
 var setColor = function () {
     color = document.getElementById('color').value;
     console.log("color:" + color);
-}
+};
 
 var setSize = function () {
     selectSize = document.getElementById('size').value;
@@ -28,7 +28,7 @@ var setSize = function () {
     }
     
     console.log("size:" + size);
-}
+};
 
 window.onload = function () {
     var canvas = document.getElementById('canvas');
@@ -50,12 +50,12 @@ window.onload = function () {
         drawingCommands.push(command);
 
         isDrawing = true;
-    }
+    };
 
     var stopDrawing = function (e) {
         console.log("stop");
         isDrawing = false;
-    }
+    };
 
     var draw = function (e) {
         if (isDrawing) {
