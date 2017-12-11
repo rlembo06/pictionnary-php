@@ -42,8 +42,43 @@ Validation des mots de passe
 
 1)
 Q :
-xxx
+quels sont les deux scénarios où l'attribut title sera affiché ?
 
 R :
-xxx
+Si le mot de passe ne respecte pas les normes du pattern
+
+//-------------------------------//
+
+2)
+Q :
+encore une fois, quelle est la différence entre name et id pour un input ?
+
+R :
+Le name sert à identifier l'input pour récupérer sa valeur lors de l'envoi du formulaire.
+l'id sert à identifier l'input pour le JavaScript ou le CSS
+
+//-------------------------------//
+
+3)
+Q :
+pourquoi est-ce qu'on a pas mis un attribut name ici ?
+
+R :
+Car on récupérera le mot de passe saisi dans #mdp1
+//-------------------------------//
+
+4)
+Q :
+quel scénario justifie qu'on ait ajouté l'écouter validateMdp2() à l'évènement onkeyup de l'input mdp1 ?
+
+R :
+Pour comparer les valeurs de #mdp1 et #mdp2 lors de la confirmation du mot de passe à l'envoi du formulaire.
+//-------------------------------//
+
+5)
+Q :
+à quoi sert l'attribut disabled ?
+
+R :
+A saisir une valeur dans l'input concerné.
 //-------------------------------//

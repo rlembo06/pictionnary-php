@@ -42,8 +42,8 @@ $(document).ready(function(){
             if(data.length > 1)
             {
                 $('#errorMessage').html('<p>Cet utilisateur est reconnu selon cet email !</p>');
-
-                var json = JSON.parse(data);
+                
+                var json = JSON.parse(data);                
                 
                 $('#email').val('');
                 $('#prenom').val(json.prenom);

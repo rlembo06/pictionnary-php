@@ -99,10 +99,9 @@ if( empty($_SESSION['id']) && empty($_SESSION['email']) ) {
 
                 <li>  
                     <label for="profilepicfile">Photo de profil:</label>  
-                    <input class="form-control" type="file" name="profilepicfile" id="profilepicfile" onchange="loadProfilePic(this)"/>  
+                    <input class="form-control" type="file" name="profilepicfile" id="profilepicfile"/>  
                     <span class="form_hint">Choisissez une image.</span>  
-                    <img  style="display: none;" name="profilepic" id="profilepic"/>  
-                    <canvas id="preview" width="0" height="0" style="border:1px solid #000000;"></canvas>  
+                    <img  name="profilepic" id="profilepic"/>  
                 </li>
 
                 <li>  

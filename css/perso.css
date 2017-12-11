@@ -76,3 +76,8 @@ ul li .inscription input[type="radio"] {
     width: 100%;
     /* text-align: center; */
 }
+
+#profilepic{
+    max-height: 96px;
+    max-width: 96px;
+}

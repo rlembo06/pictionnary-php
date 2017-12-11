@@ -19,18 +19,7 @@ $manager = new Manager($bdd);
 $post_user = json_decode( $_POST['user'] );
 
 $user = new User([ 
-    'email'     => $post_user->email,
-    'password'  => $post_user->password,
-    'nom'       => $post_user->nom,
-    'prenom'    => $post_user->prenom,
-    'tel'       => $post_user->telephone,
-    'website'   => $post_user->website,
-    'sexe'      => $post_user->sexe,
-    'birthdate' => $post_user->birthdate,
-    'ville'     => $post_user->ville,
-    'taille'    => $post_user->taille,
-    'couleur'   => $post_user->couleur,
-    'profilepic'=> $post_user->profilepic
+    'email'     => $post_user->email
 ]);
 
 $manager = new Manager($bdd);
