@@ -9,7 +9,7 @@ $(document).ready(function(){
         var nom = $('#nom').val();
         var telephone = $('#telephone').val();
         var website = $('#website').val();
-        var sexe = $('input[name="sexe"]').val();
+        var sexe = $('input[type=radio][name="sexe"]:checked').val();
         var ville = $('#ville').val();
         var taille = $('#taille').val();
         var couleur = $('#couleur').val();
