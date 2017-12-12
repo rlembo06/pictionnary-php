@@ -1,7 +1,11 @@
 var sizes = [8, 20, 44, 90];
-var size, color, selectSize;
+var size, color;
 var x0, y0;
+
+//var drawingCommands = <?php echo $commands;?>;
+//var drawingCommands = $('#drawingCommands').val();
 var drawingCommands = [];
+
 
 var setColor = function () {
     color = document.getElementById('color').value;
@@ -13,51 +17,47 @@ var setSize = function () {
     console.log("selectSize:" + selectSize);
     
     switch (selectSize) {
-        case '0':
-            size = sizes[0];
+        case '0': size = sizes[0];
             break;
-        case '1':
-            size = sizes[1];
+        case '1': size = sizes[1];
             break;
-        case '2':
-            size = sizes[2];
+        case '2': size = sizes[2];
             break;
-        case '3':
-            size = sizes[3];
+        case '3': size = sizes[3];
             break;
     }
     
     console.log("size:" + size);
 };
 
-window.onload = function () {
+window.onload = function() 
+{
+    var isDrawing = false;
     var canvas = document.getElementById('canvas');
+    var context = canvas.getContext('2d');
     canvas.width = 400;
     canvas.height = 400;
-    var context = canvas.getContext('2d');
-
+    
     setSize();
     setColor();
     document.getElementById('size').onchange = setSize;
     document.getElementById('color').onchange = setColor;
 
-    var isDrawing = false;
-
-    var startDrawing = function (e) {
+    var start = function (e) {
         console.log("start");
-        
         var command = {"command":"start",'x0': x0, 'y0':y0, 'color':color};
         drawingCommands.push(command);
-
         isDrawing = true;
-    };
-
-    var stopDrawing = function (e) {
+        
+        console.log(command);
+    }
+    
+    var stop = function (e) {
         console.log("stop");
         isDrawing = false;
     };
 
-    var draw = function (e) {
+    var draw = function(e) {
         if (isDrawing) {
             context.strokeStyle = color;
             context.lineWidth = size;
@@ -72,16 +72,39 @@ window.onload = function () {
         else return;
     }
 
-    canvas.onmousedown = startDrawing;
-    canvas.onmouseout = stopDrawing;
-    canvas.onmouseup = stopDrawing;
+    var clear = function() {
+        document.getElementById('restart').onclick = function () {
+            console.log("clear");
+            context.clearRect(0, 0, canvas.width, canvas.height);  
+        };  
+    }
+    
+    canvas.onmousedown = start;
+    canvas.onmouseout = stop;
+    canvas.onmouseup = stop;
     canvas.onmousemove = draw;
 
-    document.getElementById('restart').onclick = function () {
-        console.log("clear");
-        context.clearRect(0, 0, canvas.width, canvas.height);  
-    };
-   
+    var i = 0;  
+    var iterate = function() {
+        if (i >= drawingCommands.length) return;
+        var c = drawingCommands[i];
+        switch (c.command) {
+            case "start": start(c);
+                break;
+            case "draw":  draw(c);
+                break;
+            case "clear": clear();
+                break;
+            default:
+                console.error("cette commande n'existe pas " + c.command);
+        }  
+        i++;  
+        setTimeout(iterate, 30);
+        
+        //console.log(drawingCommands);
+    };  
+    iterate(); 
+    
     $('#tools').submit(function( event ) {
         
         var commandes = JSON.stringify($('#drawingCommands').val());
@@ -98,7 +121,7 @@ window.onload = function () {
                 
         event.preventDefault();
     });
-};
+};  
 
 var Drawing = function(_commandes, _draw, _id_user)
 {
