@@ -31,7 +31,7 @@
                         <input id="submit" type="submit" value="Connexion" /> 
                     </li>
                     <li>  
-                        <a href="inscrire.php">S'inscrire</a>
+                        <a href="inscription.php">S'inscrire</a>
                     </li>  
                 </ul>
             </fieldset>

@@ -6,7 +6,7 @@
 
     <section>
         
-        <form name="tools" id="tools" action="req_paint.php" method="post">  
+        <form name="tools" id="tools" action="traitements/req_paint.php" method="post">  
             <input type="range" name="size" id="size" min="0" max="3"/>
             <input type="color" name="color" id="color" class="inputColor" value="#<?= $_SESSION['couleur'] ?>"/>
             
