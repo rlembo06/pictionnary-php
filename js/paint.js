@@ -68,6 +68,7 @@ window.onload = function()
             context.stroke();
 
             [x0, y0] = [e.offsetX, e.offsetY];
+            //context.closePath();
         } 
         else return;
     }
@@ -107,18 +108,21 @@ window.onload = function()
     
     $('#tools').submit(function( event ) {
         
-        var commandes = JSON.stringify($('#drawingCommands').val());
+        //var commandes = JSON.stringify($('#drawingCommands').val());
+        var commandes = JSON.stringify(drawingCommands);
         var draw = canvas.toDataURL();
         var id_user = $('#id_user').val();
         
         var drawing = new Drawing(commandes, draw, id_user);
         var drawing_json = JSON.stringify(drawing);
         
+        console.log(commandes);
+        
         var postDraw = $.post('traitements/req_paint.php', {drawing: drawing_json});
         postDraw.done(function(data) {
             alert('Dessin enregistré !');
         });
-                
+          
         event.preventDefault();
     });
 };  

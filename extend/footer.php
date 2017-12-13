@@ -8,6 +8,7 @@
         <script  type="text/javascript" src="js/form.js"></script>
         <script  type="text/javascript" src="js/inscription.js"></script>
         <script  type="text/javascript" src="js/paint.js"></script>
+        <script  type="text/javascript" src="js/repaint.js"></script>
     </body> 
     
 </html>

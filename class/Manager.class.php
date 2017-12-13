@@ -162,6 +162,16 @@ Class Manager
         
         return $json ? json_encode($result) : $result;
     }
+    
+    public function getDrawings_byId(Drawing $object, $json) 
+    {        
+        $requete = $this->_bdd->prepare('SELECT * FROM drawings WHERE id = :id;');
+        $requete->bindValue(':id', $object->getId(), PDO::PARAM_INT);
+        $requete->execute();
+        $result = $requete->fetch(PDO::FETCH_ASSOC);
+        
+        return $json ? json_encode($result) : $result;
+    }
     // --------------------------------------------------- //
 }
 

@@ -19,17 +19,19 @@ $drawings = json_decode($drawings_json);
 
 <main>
 
-    <section>
+    <section id="drawings">
         <?php foreach ($drawings as $drawing) { ?>
         
             <pre class="drawings" id="<?= $drawing->id ?>">
                 <img src="<?= $drawing->draw ?>">
-                <div>
-                    <p>Commandes : <?= $drawing->commandes ?></p>
-                </div>
             </pre>
             
         <?php }?>
+    </section>
+    
+    <section id="thisDrawing">
+        <canvas id="reDrawing" width="400" height="400"></canvas>
+        <img id="imgDrawing" />
     </section>
     
 </main>

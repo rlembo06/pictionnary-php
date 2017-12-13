@@ -1,108 +1,146 @@
-var sizes = [8, 20, 44, 90];
-var size, color, selectSize;
-var x0, y0;
-var drawingCommands = [];
+(function ($) {
+    $.fn.paintBrush = function (options) {
+        var undoHistory = [];
+        var settings = {
+            'targetID': 'canvas-display'
+        },
+                $this = $(this),
+                o = {},
+                ui = {},
+                core = {
+                    init: function (options) {
+                        ui.$loadParentDiv = o.targetID;
+                        core.draw();
+                        core.controls();
+                        //core.toggleScripts();
+                    },
 
-var setColor = function () {
-    color = document.getElementById('color').value;
-    console.log("color:" + color);
-};
+                    canvasInit: function () {
+                        context = document.getElementById("canvas-display").getContext("2d");
+                        context.lineCap = "round";
+                        //Fill it with white background
+                        context.save();
+                        context.fillStyle = '#fff';
+                        context.fillRect(0, 0, context.canvas.width, context.canvas.height);
+                        context.restore();
+                    },
 
-var setSize = function () {
-    selectSize = document.getElementById('size').value;
-    console.log("selectSize:" + selectSize);
-    
-    switch (selectSize) {
-        case '0':
-            size = sizes[0];
-            break;
-        case '1':
-            size = sizes[1];
-            break;
-        case '2':
-            size = sizes[2];
-            break;
-        case '3':
-            size = sizes[3];
-            break;
-    }
-    
-    console.log("size:" + size);
-};
+                    saveActions: function () {
+                        var imgData = document.getElementById("canvas-display").toDataURL("image/png");
+                        undoHistory.push(imgData);
+                        $('#undo').removeAttr('disabled');
 
-window.onload = function () {
-    var canvas = document.getElementById('canvas');
-    canvas.width = 400;
-    canvas.height = 400;
-    var context = canvas.getContext('2d');
+                    },
 
-    setSize();
-    setColor();
-    document.getElementById('size').onchange = setSize;
-    document.getElementById('color').onchange = setColor;
+                    undoDraw: function () {
+                        if (undoHistory.length > 0) {
+                            var undoImg = new Image();
+                            $(undoImg).load(function () {
+                                var context = document.getElementById("canvas-display").getContext("2d");
+                                context.drawImage(undoImg, 0, 0);
+                            });
+                            undoImg.src = undoHistory.pop();
+                            if (undoHistory.length == 0)
+                                $('#undo').attr('disabled', 'disabled');
+                        }
+                    },
 
-    var isDrawing = false;
+                    draw: function () {
+                        var canvas, cntxt, top, left, draw, draw = 0;
+                        canvas = document.getElementById("canvas-display");
+                        cntxt = canvas.getContext("2d");
+                        top = $('#canvas-display').offset().top;
+                        left = $('#canvas-display').offset().left;
+                        core.canvasInit();
 
-    var startDrawing = function (e) {
-        console.log("start");
-        
-        var command = {"command":"start",'x0': x0, 'y0':y0, 'color':color};
-        drawingCommands.push(command);
+                        //Drawing Code
+                        $('#canvas-display').mousedown(function (e) {
+                            if (e.button == 0) {
+                                draw = 1;
+                                core.saveActions(); //Start The drawing flow. Save the state
+                                cntxt.beginPath();
+                                cntxt.moveTo(e.pageX - left, e.pageY - top);
+                            } else {
+                                draw = 0;
+                            }
+                        })
+                                .mouseup(function (e) {
+                                    if (e.button != 0) {
+                                        draw = 1;
+                                    } else {
+                                        draw = 0;
+                                        cntxt.lineTo(e.pageX - left + 1, e.pageY - top + 1);
+                                        cntxt.stroke();
+                                        cntxt.closePath();
+                                    }
+                                })
+                                .mousemove(function (e) {
+                                    if (draw == 1) {
+                                        cntxt.lineTo(e.pageX - left + 1, e.pageY - top + 1);
+                                        cntxt.stroke();
+                                    }
+                                });
 
-        isDrawing = true;
+                    },
+
+                    controls: function () {
+                        canvas = document.getElementById("canvas-display");
+                        cntxt = canvas.getContext("2d");
+                        $('#export').click(function (e) {
+                            e.preventDefault();
+                            window.open(canvas.toDataURL(), 'Canvas Export', 'height=400,width=400');
+                        });
+
+                        $('#clear').live("click", function (e) {
+                            e.preventDefault();
+                            canvas.width = canvas.width;
+                            canvas.height = canvas.height;
+                            core.canvasInit();
+                            $('#colors li:first').click();
+                            $('#brush_size').change();
+                            //core.toggleScripts();
+                            undoHistory = [];
+                        });
+
+                        $('#brush_size').change(function (e) {
+                            cntxt.lineWidth = $(this).val();
+                            //core.toggleScripts();
+                        });
+
+                        $('#colors li').live("click", function (e) {
+                            e.preventDefault();
+                            $('#colors li').removeClass('selected');
+                            $(this).addClass('selected');
+                            cntxt.strokeStyle = $(this).css('background-color');
+                            core.toggleScripts();
+                        });
+
+                        //Undo Binding
+                        $('#undo').live("click", function (e) {
+                            e.preventDefault();
+                            core.undoDraw()
+                            core.toggleScripts();
+                        });
+
+                        //Init the brush and color
+                        $('#colors li:first').click();
+                        $('#brush_size').change();
+
+                        $('#controls').live("click", function () {
+                            core.toggleScripts();
+                        });
+                    },
+
+                    toggleScripts: function () {
+                        $('#colors').slideToggle(400);
+                        $('#control-buttons').toggle(400);
+                    }
+                };
+
+        $.extend(true, o, settings, options);
+
+        core.init();
+
     };
+})(jQuery);
 
-    var stopDrawing = function (e) {
-        console.log("stop");
-        isDrawing = false;
-    };
-
-    var draw = function (e) {
-        if (isDrawing) {
-            context.strokeStyle = color;
-            context.lineWidth = size;
-
-            context.beginPath();
-            context.moveTo(x0, y0);
-            context.lineTo(e.offsetX, e.offsetY);
-            context.stroke();
-
-            [x0, y0] = [e.offsetX, e.offsetY];
-        } 
-        else return;
-    }
-
-    canvas.onmousedown = startDrawing;
-    canvas.onmouseout = stopDrawing;
-    canvas.onmouseup = stopDrawing;
-    canvas.onmousemove = draw;
-
-    document.getElementById('restart').onclick = function () {
-        console.log("clear");
-        context.clearRect(0, 0, canvas.width, canvas.height);  
-    };
-   
-    $('#tools').submit(function( event ) {
-        
-        var commandes = JSON.stringify($('#drawingCommands').val());
-        var draw = canvas.toDataURL();
-        var id_user = $('#id_user').val();
-        
-        var drawing = new Drawing(commandes, draw, id_user);
-        var drawing_json = JSON.stringify(drawing);
-        
-        var postDraw = $.post('traitements/req_paint.php', {drawing: drawing_json});
-        postDraw.done(function(data) {
-            alert('Dessin enregistré !');
-        });
-                
-        event.preventDefault();
-    });
-};
-
-var Drawing = function(_commandes, _draw, _id_user)
-{
-    this.commandes = _commandes;
-    this.draw = _draw;
-    this.id_user = _id_user;
-};
