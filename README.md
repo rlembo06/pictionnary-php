@@ -89,6 +89,7 @@ Q :
 
 
 R :
+<code>
 <head>
 	<meta charset=utf-8 />
 	<title>Pictionnary - Inscription</title>
@@ -101,7 +102,7 @@ R :
 	<link rel="stylesheet" href="css/blog-home.css">
 	<link rel="stylesheet" href="css/paint.css">
 </head>
-
+</code>
 <hr>
 
 11)
