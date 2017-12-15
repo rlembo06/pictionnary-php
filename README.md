@@ -1,3 +1,4 @@
+<a href="http://miageprojet2.unice.fr/User:Max/LPSIL_IDSE_-_Web_Multim%c3%a9dia_%2f%2f_Web_S%c3%a9mantique/Partie_1%3a_Application_Pictionnary">Lien du TP</>
 
 1)
 Q :
