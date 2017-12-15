@@ -1,84 +1,114 @@
-##############
-page inscription.php
-#############
 
 1)
 Q :
-c'est quoi les attributs action et method ?
+C'est quoi les attributs action et method ?
 
 R :
 Attribut "action" : Permet de spécifier une URI pour éffectuer le traitement du formulaire.
 Attribut "method" : Permet de spécifier la méthode HTTP pour envoyer les données vers le serveur (GET, POST, PUT, DELETE, etc).
-//-------------------------------//
+
+<hr>
 
 2)
 Q :
-qu'y a-t-il d'autre comme possiblité que post pour l'attribut method ?
+Qu'y a-t-il d'autre comme possiblité que post pour l'attribut method ?
 
 R :
 Il y a GET, PUT, DELETE, OPTIONS, TRACE, HEAD, CONNECT, PATCH).
-//-------------------------------//
+
+<hr>
 
 3)
 Q :
-quelle est la différence entre les attributs name et id ?
+Quelle est la différence entre les attributs name et id ?
 
 R :
 Attribut "name" : Pour identifier le champs d'un formulaire lors de l'envoie de ce dernier vers le serveur.
 Attribut "id" : Est un identifiant unique qui doit être unique pour l'ensemble du document. Pour modifier son style CSS par exemple ou lui attribuer une fonction en JavaScript.
-//-------------------------------//
+
+<hr>
 
 4)
 Q :
-c'est lequel qui doit être égal à l'attribut for du label ?
+C'est lequel qui doit être égal à l'attribut for du label ?
 
 R :
 C'est l'attribut name qui doit avoir le même id que l'attribut for du label.
-//-------------------------------//
 
-##############
-Validation des mots de passe
-#############
+<hr>
 
-1)
+5)
 Q :
-quels sont les deux scénarios où l'attribut title sera affiché ?
+Quels sont les deux scénarios où l'attribut title sera affiché ?
 
 R :
 Si le mot de passe ne respecte pas les normes du pattern
 
-//-------------------------------//
+<hr>
 
-2)
+6)
 Q :
-encore une fois, quelle est la différence entre name et id pour un input ?
+Encore une fois, quelle est la différence entre name et id pour un input ?
 
 R :
 Le name sert à identifier l'input pour récupérer sa valeur lors de l'envoi du formulaire.
-l'id sert à identifier l'input pour le JavaScript ou le CSS
+l'id sert à identifier l'input pour le JavaScript ou le CSS.
 
-//-------------------------------//
+<hr>
 
-3)
+7)
 Q :
-pourquoi est-ce qu'on a pas mis un attribut name ici ?
+Pourquoi est-ce qu'on a pas mis un attribut name ici ?
 
 R :
 Car on récupérera le mot de passe saisi dans #mdp1
-//-------------------------------//
 
-4)
+<hr>
+
+8)
 Q :
-quel scénario justifie qu'on ait ajouté l'écouter validateMdp2() à l'évènement onkeyup de l'input mdp1 ?
+Quel scénario justifie qu'on ait ajouté l'écouter validateMdp2() à l'évènement onkeyup de l'input mdp1 ?
 
 R :
 Pour comparer les valeurs de #mdp1 et #mdp2 lors de la confirmation du mot de passe à l'envoi du formulaire.
-//-------------------------------//
 
-5)
+<hr>
+
+9)
 Q :
-à quoi sert l'attribut disabled ?
+À quoi sert l'attribut disabled ?
 
 R :
-A saisir une valeur dans l'input concerné.
-//-------------------------------//
+A ne pas saisir une valeur dans l'input concerné.
+
+<hr>
+
+10)
+Q :
+À Quoi Ressemble Un <Head> Propre?
+
+
+R :
+<head>
+	<meta charset=utf-8 />
+	<title>Pictionnary - Inscription</title>
+	<meta name="description" content="TP - Lembo Romain">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<link rel="stylesheet" media="screen" href="css/styles.css" >
+	<link rel="stylesheet" href="css/perso.css"/>
+	<link rel="stylesheet" href="css/blog-home.css">
+	<link rel="stylesheet" href="css/paint.css">
+</head>
+
+<hr>
+
+11)
+Q :
+À quoi servent ces champs hidden ?
+
+R :
+Cela est utile pour cacher un input, par exemple dans le but de récupérer un identifiant lorsque le formulaire est envoyé.
+
+
